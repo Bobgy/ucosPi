@@ -7,20 +7,21 @@ extern void PUT32(INT32U, INT32U);
 extern INT32U GET32(INT32U);
 extern void pinMode(int pin, int v);
 void digitalWrite(int pin, int v);
-INT8U digitalRead(int pin);
+INT32U digitalRead(int pin);
 int dht11_read_val();
 
 void light(int bit, int val);
 
-INT32U num = 0, placeholder = 0;
+INT32U num = 0;
 void userApp1(void * args) {
 	while(1) {
 		num++;
 		digitalWrite(16, num&1);
 		digitalWrite(27, num&1);
 		uart_string("tick");
-		//hexstrings(digitalRead(DHT11PIN));
-		//dht11_read_val();
+		hexstring(digitalRead(DHT11PIN));
+		uart_flush();
+		dht11_read_val();
 		OSTimeDlyHMSM(0, 0, 1, 0);
 	}
 }
@@ -81,7 +82,7 @@ void digitalWrite(int pin, int v) {
 	else   PUT32(GPCLR0, 1<<pin);
 }
 
-INT8U digitalRead(int pin) {
+INT32U digitalRead(int pin) {
 	return (GET32(GPIN0) >> pin) & 1;
 }
 
@@ -91,7 +92,7 @@ int dht11_read_val(){
     INT8U counter=0;
     INT8U j=0,i;
 
-	uart_string("reading dht11");
+	uart_string("reading dht11\r\n");
 	uart_flush();
 
     for(i=0;i<5;i++)dht11_val[i]=0;
@@ -125,21 +126,17 @@ int dht11_read_val(){
             j++;
         }
     }
-	uart_string("j=");
-	hexstring(j);
-	uart_flush();
     // verify checksum and print the verified data
+	uart_string("j:");
+	hexstring(j);
     if((j>=40)&&(dht11_val[4]==((dht11_val[0]+dht11_val[1]+dht11_val[2]+dht11_val[3])& 0xFF))){
 		uart_string("RH:");
 		hexstring(dht11_val[0]);
 		uart_string("TEMP:");
 		hexstring(dht11_val[2]);
+		return 1;
     } else {
-		int k;
-		for(k=0;k<5;++k)
-			hexstring(dht11_val[k]);
-		uart_string("Failed.");
+		uart_string("Failed.\r\n");
 	}
-	uart_flush();
 	return 0;
 }

@@ -1,0 +1,3 @@
+build/*
+ucos_bcm2835.*
+kernel.img

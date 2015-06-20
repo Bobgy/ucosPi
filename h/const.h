@@ -13,7 +13,6 @@
 
 #define MAX_TIME 85
 #define DHT11PIN 17
-#define ATTEMPTS 5                 //retry 5 times when no response
 
 #define INPUT 0x0
 #define OUTPUT 0x1

@@ -93,6 +93,4 @@ void uart_string (char* s)
     	uart_send((unsigned int)*s);
     	s++;
     }
-	uart_send(0x0D);
-	uart_send(0x0A);
 }

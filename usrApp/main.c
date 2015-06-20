@@ -10,7 +10,7 @@ OS_STK  displayLEDTaskStk[1000];
 extern void userApp1(void *);
 extern void displayLED(void *);
 void init();
-extern void PUT32 ( unsigned int, unsigned int );
+extern void PUT32 ( INT32U, INT32U );
 extern INT32U GET32 ( INT32U );
 
 void main()

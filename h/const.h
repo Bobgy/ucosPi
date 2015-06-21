@@ -20,13 +20,8 @@
 #define HIGH 1
 #define LOW 0
 
-#ifdef _OS_Dly_
-    #define TIMEOUT_SHORT 10
-    #define TIMEOUT_LONG 40
-#else
-    #define TIMEOUT_SHORT 100
-    #define TIMEOUT_LONG 400
-#endif
+#define TIMEOUT_SHORT 1000
+#define TIMEOUT_LONG 1000000
 
 extern void PUT32 ( INT32U, INT32U );
 extern INT32U GET32 ( INT32U );

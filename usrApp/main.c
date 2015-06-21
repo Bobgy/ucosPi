@@ -5,10 +5,10 @@
 #include "const.h"
 #include "utils.h"
 
-OS_STK  userAppTaskStk1[1000];
+OS_STK  readDHT11Stk[1000];
 OS_STK  displayLEDTaskStk[1000];
 
-extern void userApp1(void *);
+void readDHT11(void *);
 extern void displayLED(void *);
 void init();
 
@@ -26,7 +26,7 @@ void main()
 
 	init();
 
-	OSTaskCreate(userApp1, (void *) 0, &userAppTaskStk1[1000-1],5);
+	OSTaskCreate(readDHT11, (void *) 0, &readDHT11Stk[1000-1],5);
 
 	OSTaskCreate(displayLED, (void *) 0, &displayLEDTaskStk[1000-1],4);
 
@@ -51,6 +51,7 @@ void init() {
 
 	pinMode(16, OUTPUT);
 	pinMode(27, OUTPUT);
+
 	pinMode(DHT11PIN, INPUT);
 	pinPullUp(DHT11PIN);
 }

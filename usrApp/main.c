@@ -29,7 +29,7 @@ void main()
 
 	OSTaskCreate(userApp1, (void *) 0, &userAppTaskStk1[1000-1],5);
 
-	OSTaskCreate(displayLED, (void *) 0, &displayLEDTaskStk[1000-1],16);
+	OSTaskCreate(displayLED, (void *) 0, &displayLEDTaskStk[1000-1],4);
 
 	OSStart();
 

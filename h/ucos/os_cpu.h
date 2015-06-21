@@ -23,19 +23,19 @@
 */
 
 
-typedef unsigned char  BOOLEAN;                 /* ²¼¶û±äÁ¿                                 */
-typedef unsigned char  INT8U;                   /* ÎÞ·ûºÅ8Î»ÕûÐÍ±äÁ¿                        */
-typedef signed   char  INT8S;                   /* ÓÐ·ûºÅ8Î»ÕûÐÍ±äÁ¿                        */
-typedef unsigned short INT16U;                  /* ÎÞ·ûºÅ16Î»ÕûÐÍ±äÁ¿                       */
-typedef signed   short INT16S;                  /* ÓÐ·ûºÅ16Î»ÕûÐÍ±äÁ¿                       */
-typedef unsigned int   INT32U;                  /* ÎÞ·ûºÅ32Î»ÕûÐÍ±äÁ¿                       */
-typedef signed   int   INT32S;                  /* ÓÐ·ûºÅ32Î»ÕûÐÍ±äÁ¿                       */
-typedef float          FP32;                    /* µ¥¾«¶È¸¡µãÊý£¨32Î»³¤¶È£©                 */
-typedef double         FP64;                    /* Ë«¾«¶È¸¡µãÊý£¨64Î»³¤¶È£©                 */
+typedef unsigned char  BOOLEAN;                 /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½                                 */
+typedef unsigned char  INT8U;                   /* ï¿½Þ·ï¿½ï¿½ï¿½8Î»ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½                        */
+typedef signed   char  INT8S;                   /* ï¿½Ð·ï¿½ï¿½ï¿½8Î»ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½                        */
+typedef unsigned short INT16U;                  /* ï¿½Þ·ï¿½ï¿½ï¿½16Î»ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½                       */
+typedef signed   short INT16S;                  /* ï¿½Ð·ï¿½ï¿½ï¿½16Î»ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½                       */
+typedef unsigned int   INT32U;                  /* ï¿½Þ·ï¿½ï¿½ï¿½32Î»ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½                       */
+typedef signed   int   INT32S;                  /* ï¿½Ð·ï¿½ï¿½ï¿½32Î»ï¿½ï¿½ï¿½Í±ï¿½ï¿½ï¿½                       */
+typedef float          FP32;                    /* ï¿½ï¿½ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½32Î»ï¿½ï¿½ï¿½È£ï¿½                 */
+typedef double         FP64;                    /* Ë«ï¿½ï¿½ï¿½È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½64Î»ï¿½ï¿½ï¿½È£ï¿½                 */
 
-typedef INT32U         OS_STK;                  /* ¶ÑÕ»ÊÇ32Î»¿í¶È                           */
+typedef INT32U         OS_STK;                  /* ï¿½ï¿½Õ»ï¿½ï¿½32Î»ï¿½ï¿½ï¿½ï¿½                           */
 
-/* ÒÔÏÂÊÇ¼æÈÝUC/OS V1.XXµÄÊý¾ÝÀàÐÍ£¬ÔÚuC/OS-IIÃ»ÓÐÊ¹ÓÃ  */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½UC/OS V1.XXï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£ï¿½ï¿½ï¿½uC/OS-IIÃ»ï¿½ï¿½Ê¹ï¿½ï¿½  */
 #define BYTE           INT8S
 #define UBYTE          INT8U
 #define WORD           INT16S
@@ -45,27 +45,27 @@ typedef INT32U         OS_STK;                  /* ¶ÑÕ»ÊÇ32Î»¿í¶È               
 
 #ifndef NULL
 #define NULL 0
-#endif 
+#endif
 
 typedef INT32U   		OS_CPU_SR;                /* Define size of CPU status register (PSR = 32 bits) */
 
-/* 
+/*
 *********************************************************************************************************
 *                                              ARM
 *
 * Method #1:  NOT IMPLEMENTED
 *             Disable/Enable interrupts using simple instructions.  After critical section, interrupts
 *             will be enabled even if they were disabled before entering the critical section.
-*             
+*
 * Method #2:  NOT IMPLEMENTED
-*             Disable/Enable interrupts by preserving the state of interrupts.  In other words, if 
+*             Disable/Enable interrupts by preserving the state of interrupts.  In other words, if
 *             interrupts were disabled before entering the critical section, they will be disabled when
 *             leaving the critical section.
 *             NOT IMPLEMENTED
 *
 * Method #3:  Disable/Enable interrupts by preserving the state of interrupts.  Generally speaking you
 *             would store the state of the interrupt disable flag in the local variable 'cpu_sr' and then
-*             disable interrupts.  'cpu_sr' is allocated in all of uC/OS-II's functions that need to 
+*             disable interrupts.  'cpu_sr' is allocated in all of uC/OS-II's functions that need to
 *             disable interrupts.  You would restore the interrupt disable state by copying back 'cpu_sr'
 *             into the CPU's status register.  This is the prefered method to disable interrupts.
 *********************************************************************************************************
@@ -111,4 +111,3 @@ int OSCPUGetSR(void);
 #endif
 
 #endif
-

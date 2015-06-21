@@ -11,7 +11,7 @@
 #define DIGITF 10
 #define DIGITG 9
 
-#define MAX_TIME 85
+#define MAX_TIME 50
 #define DHT11PIN 17
 
 #define INPUT 0x0
@@ -19,3 +19,13 @@
 
 #define HIGH 1
 #define LOW 0
+
+#ifdef _OS_Dly_
+    #define TIMEOUT_SHORT 10
+    #define TIMEOUT_LONG 40
+#else
+    #define TIMEOUT_SHORT 100
+    #define TIMEOUT_LONG 400
+#endif
+
+//#define RESET

@@ -20,6 +20,7 @@ OBJS += build/ucos_ii.o
 
 OBJS += build/main.o
 OBJS += build/userApp.o
+OBJS += build/utils.o
 
 OBJS += lib/libc.a
 OBJS += lib/libgcc.a

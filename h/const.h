@@ -28,4 +28,8 @@
     #define TIMEOUT_LONG 400
 #endif
 
+extern void PUT32 ( INT32U, INT32U );
+extern INT32U GET32 ( INT32U );
+
+
 //#define RESET

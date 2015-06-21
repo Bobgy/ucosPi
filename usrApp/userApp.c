@@ -2,15 +2,9 @@
 #include "ucos/includes.h"
 #include "regs.h"
 #include "const.h"
+#include "utils.h"
 
-extern void PUT32(INT32U, INT32U);
-extern INT32U GET32(INT32U);
-extern void pinMode(int pin, int v);
-
-void digitalWrite(int pin, int v);
-INT32U digitalRead(int pin);
 int dht11_read_val();
-
 void light(int bit, int val);
 
 INT32U num = 0;
@@ -63,46 +57,10 @@ void light(int bit, int val){
 	digitalWrite(DIGITG,digit[val][6]);
 }
 
-inline void digitalWrite(int pin, int v) {
-	if (v) PUT32(GPSET0, 1<<pin);
-	else   PUT32(GPCLR0, 1<<pin);
-}
-
-inline INT32U digitalRead(int pin) {
-	return (GET32(GPIN0) >> pin) & 1;
-}
-
-int q[200], top=0;
-
-inline INT32U abs(int x) {
-	return x > 0 ? x : -x;
-}
-
-inline int waitEdge(int pin, int timeOut) {
-	int len = 1, v = digitalRead(pin);
-	for (; len < timeOut; ++len) {
-		if (digitalRead(pin) != v) break;
-		len++;
-	}
-	q[top++]=(len<<4)|v;
-	return v ? len : -len;
-}
-
 inline int waitDHT(int v, int timeOut) {
 	int len = waitEdge(DHT11PIN, timeOut);
 	if ((len > 0) == v) return abs(len);
 	return 0;
-}
-
-void error(int len, char *msg) {
-	uart_string(msg);
-	hexstring(len);
-	uart_flush();
-}
-
-int _delay;
-void delay(int time) {
-	while(time--)_delay+=time;
 }
 
 int dht11_val[8]={0,0,0,0,0}, act=0;
